@@ -94,22 +94,25 @@ systemctl enable --now dhcpd
 ```
 ### Настройка DNS для офисов HQ и BR
 ### HQ-SRV:
+
 ```
 nano /etc/bind/options.conf
 ```
+
 Меняем выделенные строчки:
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/меняем%20строки%20в%20бинде.png"/>
 </p>
+
 ```
 systemctl enable --now bind
-```
-```
 nano /etc/bind/local.conf
 ```
+
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/локалконф%20днс.png"/>
 </p>
+
 ```
 cd /etc/bind/zone
 cp localdomain au.db
@@ -117,19 +120,25 @@ cp 127.in-addr.arpa 0.db
 chown root:named {au,0}.db
 nano au.db
 ```
+
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/audb.png"/>
 </p>
+
 ```
 nano 0.db
 ```
+
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/0db.png"/>
 </p>
+
 ```
 systemctl restart bind
 ```
+
 Проверка:
+
 ```
 host hq-rtr.au-team.irpo
 ```
