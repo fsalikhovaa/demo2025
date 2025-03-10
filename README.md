@@ -21,5 +21,5 @@ nmtui
 ```
 ### Адресация
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/Снимок%20экрана%202025-03-10%20134140.png"/>
 </p>
