@@ -19,6 +19,7 @@ hostnamectl set-hostname имя_устройства; exec bash
 ```
 nmtui
 ```
+### Адресация
 <p align="center">
   <img src=""/>
 </p>
