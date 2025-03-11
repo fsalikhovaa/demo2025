@@ -51,6 +51,7 @@ enter
 nano /etc/openssh/sshd_config
 ```
 Находим строчки:
+
 #port 22, раскоменчиваем и пишем порт 2024
 
 Banner /etc/mybanner
@@ -58,6 +59,7 @@ Banner /etc/mybanner
 MaxAuthTries 2
 
 ДОБАВЛЯЕМ строчку:
+
 AllowUsers sshuser
 
 ctrl+x
