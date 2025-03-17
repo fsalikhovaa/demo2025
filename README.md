@@ -222,24 +222,17 @@ nano /etc/bind/options.conf
 ```
 
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/options.png"/>
 </p>
 
 ```
 systemctl stop bind
-```
-
-<p align="center">
-  <img src=""/>
-</p>
-
-```
 nano /etc/sysconfig/network
 ```
 Прописываем полное доменное имя хоста 
 
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/sysconfig%20net.png"/>
 </p>
 
 ```
@@ -255,17 +248,17 @@ samba-tool domain provision BIND9_DLZ, P@ssw0rd
 Проверяем есть ли необходимые записи в файле /etc/resolv.conf и в /etc/krb5.conf 
 
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/5285432947287127148.jpg"/>
 </p>
 
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/5285432947287127149.jpg"/>
 </p>
 
 Заходим в файл /etc/bind/named.conf и комментим в нем строку как на фото (!)
 
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/5287485572287425229.jpg"/>
 </p>
 
 ```
@@ -294,14 +287,23 @@ kinit administrator@AU-TEM.IRPO
 ```
 acc
 ```
+Нажимаем "Аутентификация"
 
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/5287485572287425247.jpg"/>
 </p>
 
 Вводим пароль администратора P@ssw0rd
 
 <p align="center">
-  <img src=""/>
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/5287485572287425257.jpg"/>
 </p>
 
+### Создайте 5 пользователей для офиса HQ:
+Прописываем команду 
+```
+admc
+```
+В открывшимся окне разворачиваем au-team.irpo
+Открываем вкладку users и создаем пользователей
+имена пользователей формата user№.hq
