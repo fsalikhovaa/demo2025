@@ -93,6 +93,41 @@ nano /etc/net/sysctl.conf
   <img src="https://github.com/fsalikhovaa/demo2025/blob/main/hq.png">
 </p>
 
+### Обеспечьте динамическую маршрутизацию: ресурсы одного офиса должны быть доступны из другого офиса. Для обеспечения динамической маршрутизации используйте link state протокол на ваше усмотрение.
+Настраиваем OSPF
+```
+nano /etc/frr/daemons
+```
+меняем строчку
+ospfd=no на строчку
+ospfd=yes
+
+### HQ-RTR:
+```
+systemctl enable --now frr
+vtysh
+conf t
+router ospf
+passive-interface default
+network 192.168.0.0/24 area 0
+network 172.16.0.0/26 area 0
+exit
+interface tun1
+no ip ospf network broadcast
+no ip ospf passive
+exit
+do write memory
+exit
+nmcli connection edit tun1
+set ip-tunnel.ttl 64
+save
+quit
+systemctl restart frr
+```
+
+### BR-RTR:
+Повторяем настройку выше со своими адресами.
+
 ### Настройка протокола динамической конфигурации хостов 
 Для офиса HQ сервером DHCP выступает HQ-RTR. Клиентом является машина HQ-CLI
 ```
