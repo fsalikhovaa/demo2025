@@ -214,3 +214,94 @@ host hq-rtr.au-team.irpo
 
 ## МОДУЛЬ 2
 ### Настройте доменный контроллер Samba на машине HQ-SRV
+Произведём временное отключение интерфейсов. Обязательно перед началом настройки samba!
+nmtui
+```
+grep -q 'bind-dns' /etc/bind/named.conf || echo 'include "/var/lib/samba/bind-dns/named.conf";' >> /etc/bind/named.conf
+nano /etc/bind/options.conf
+```
+
+<p align="center">
+  <img src=""/>
+</p>
+
+```
+systemctl stop bind
+```
+
+<p align="center">
+  <img src=""/>
+</p>
+
+```
+nano /etc/sysconfig/network
+```
+Прописываем полное доменное имя хоста 
+
+<p align="center">
+  <img src=""/>
+</p>
+
+```
+hostnamectl set-hostname hq-srv.au-team.irpo;exec bash
+domainname au-team.irpo
+rm -f /etc/samba/smb.conf
+rm -rf /var/lib/samba
+rm -rf /var/cache/samba
+mkdir -p /var/lib/samba/sysvol
+samba-tool domain provision BIND9_DLZ, P@ssw0rd
+```
+
+Проверяем есть ли необходимые записи в файле /etc/resolv.conf и в /etc/krb5.conf 
+
+<p align="center">
+  <img src=""/>
+</p>
+
+<p align="center">
+  <img src=""/>
+</p>
+
+Заходим в файл /etc/bind/named.conf и комментим в нем строку как на фото (!)
+
+<p align="center">
+  <img src=""/>
+</p>
+
+```
+systemctl enable --now samba
+systemctl enable --now bind
+cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
+samba-tool domain info 127.0.0.1
+```
+Проверка:
+```
+host -t SRV _kerberos._udp.au-team.irpo.
+host -t SRV _ldap._tcp.au-team.irpo.
+host -t A hq-srv.au-team.irpo
+```
+
+```
+kinit administrator@AU-TEM.IRPO
+```
+После этой команды выйдет приглашение на ввод пароля, вводим P@ssw0rd, поскольку раннее мы задавали его
+
+### Ввод машины в домен
+### HQ-CLI:
+В параметрах сети указываем днс 172.16.0.2 и поисковой домен au-team.irpo
+
+Открываем терминал
+```
+acc
+```
+
+<p align="center">
+  <img src=""/>
+</p>
+
+Вводим пароль администратора P@ssw0rd
+
+<p align="center">
+  <img src=""/>
+</p>
+
