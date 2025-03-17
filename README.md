@@ -68,6 +68,27 @@ enter
 ```
 systemctl restart sshd.service
 ```
+
+### Между офисами HQ и BR необходимо сконфигурировать ip туннель
+Перед настройкой самого тоннеля необходимо убедиться, что на ISP включён forwarding IPv4
+### ISP:
+```
+nano /etc/net/sysctl.conf
+```
+и меняем строчку net ipv4 forwarding значение на 1
+<p align="center">
+  <img src="">
+</p>
+Настраиваем GRE через nmtui
+### BR-RTR:
+<p align="center">
+  <img src="">
+</p>
+### HQ-RTR:
+<p align="center">
+  <img src="">
+</p>
+
 ### Настройка протокола динамической конфигурации хостов 
 Для офиса HQ сервером DHCP выступает HQ-RTR. Клиентом является машина HQ-CLI
 ```
