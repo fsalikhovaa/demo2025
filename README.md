@@ -76,14 +76,18 @@ systemctl restart sshd.service
 nano /etc/net/sysctl.conf
 ```
 и меняем строчку net ipv4 forwarding значение на 1
+
 <p align="center">
   <img src="">
 </p>
+
 Настраиваем GRE через nmtui
 ### BR-RTR:
+
 <p align="center">
   <img src="">
 </p>
+
 ### HQ-RTR:
 <p align="center">
   <img src="">
