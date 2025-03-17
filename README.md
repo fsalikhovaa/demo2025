@@ -78,19 +78,19 @@ nano /etc/net/sysctl.conf
 и меняем строчку net ipv4 forwarding значение на 1
 
 <p align="center">
-  <img src="">
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/isp.png">
 </p>
 
 Настраиваем GRE через nmtui
 ### BR-RTR:
 
 <p align="center">
-  <img src="">
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/br.png">
 </p>
 
 ### HQ-RTR:
 <p align="center">
-  <img src="">
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/hq.png">
 </p>
 
 ### Настройка протокола динамической конфигурации хостов 
