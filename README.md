@@ -211,3 +211,6 @@ systemctl restart bind
 host hq-rtr.au-team.irpo
 ```
 Должен выдать IP-адрес
+
+## МОДУЛЬ 2
+### Настройте доменный контроллер Samba на машине HQ-SRV
