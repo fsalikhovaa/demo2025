@@ -430,3 +430,57 @@ touch /mnt/nfs/TEST
 ls –l  /root/raid5/nfs
 ```
 
+###  Сконфигурируйте ansible на сервере BR-SRV :
+### Сформируйте файл инвентаря, в инвентарь должны входить HQ-SRV,HQ-CLI, HQ-RTR и BR-RTR. Рабочий каталог ansible должен располагаться в /etc/ansible
+### BR-SRV:
+Заходим в файл /etc/ansible/hosts и заносим данные о хостах:
+<p align="center">
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/инвентарь%20энсибл.png"/>
+</p>
+С помощью следующей команды генерируем ssh-ключ:
+
+```
+ssh-keygen –C “$(whoami)@$(hostname)-$(date –I)”
+```
+
+Далее копируем этот ключ по  ssh на все клиенты, которые должны входить в инвентарь: ssh-copy-id имя_пользователя_из_файла_hosts@ip_адрес_из_того_же_файла
+
+```
+ssh-copy-id sshuser@172.16.0.2 –p 2024
+ssh-copy-id user@172.16.0.3
+ssh-copy-id user@172.16.0.1
+ssh-copy-id user@172.16.5.2
+```
+
+На всех клиентах Ansible кроме HQ-SRV необходимо в файле /etc/openssh/sshd_conf раскомментировать строку Port 22 и прописать AllowUsers user. Обязательно перезапустить демон: 
+
+```
+systemctl restart sshd
+```
+
+### Все указанные машины должны без предупреждений и ошибок отвечать pong на команду ping в ansible посланную с BR-SRV
+Отправить ping:
+
+```
+ansible all –m ping 
+```
+
+<p align="center">
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/pong.png"/>
+</p>
+
+Чтобы предупреждение не вылезало прописываем:
+
+```
+/etc/ansible/ansible.cfg
+```
+
+<p align="center">
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/Рисунок6.png"/>
+</p>
+
+Должно получиться:
+
+<p align="center">
+  <img src="https://github.com/fsalikhovaa/demo2025/blob/main/ping%20pong.png"/>
+</p>
